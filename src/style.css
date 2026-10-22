@@ -47,7 +47,7 @@ button, a { -webkit-tap-highlight-color: transparent; }
 .section-kicker { color: #a16842; margin: 0 0 14px; }
 .section-heading h2 { font-family: 'Shippori Mincho', serif; font-weight: 500; font-size: clamp(30px, 3.1vw, 46px); letter-spacing: .08em; margin: 0; }
 .section-heading > p { font-size: 12px; line-height: 2.15; color: #647067; margin: 0; letter-spacing: .04em; }
-.work-grid { display: grid; grid-template-columns: minmax(0, 680px); gap: 28px; }
+.work-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 32px; }
 .work-card { display: block; min-width: 0; }
 .work-image { background: radial-gradient(circle at 50% 54%, #4e3930 0, #282a27 50%, #1a211f 100%); aspect-ratio: 1.57; position: relative; overflow: hidden; display: grid; place-items: center; }
 .work-image img { height: 100%; width: 100%; object-fit: contain; transition: transform .4s ease; }
@@ -160,3 +160,21 @@ button, a { -webkit-tap-highlight-color: transparent; }
 
 .hero-art img { mask-image: radial-gradient(ellipse at 50% 53%, #000 57%, transparent 76%); }
 .work-image { background: #111619; }
+.lakeside-page .detail-stage-frame { background: #183440; }
+.lakeside-page .detail-content { grid-template-columns: minmax(0, 1.65fr) minmax(320px, .7fr); }
+.lakeside-page .detail-copy { padding-left: 4vw; padding-right: 4vw; }
+.lakeside-page .detail-eyebrow, .lakeside-page .stage-corner { color: #b9d1cd; }
+.lakeside-page .detail-rule { background: #90bcb0; }
+.lakeside-page .detail-lead { font-size: 20px; letter-spacing: .04em; text-wrap: balance; }
+.lakeside-page .control-buttons button[aria-pressed="true"] { background: #6fbaad20; border-color: #90bcb0; }
+.lakeside-page .control-buttons button span { color: #b6d8bd; }
+.lake-stage canvas:focus-visible { outline: 2px solid #b6d8bd; outline-offset: -5px; }
+@media (max-width: 1100px) {
+  .lakeside-page .detail-content { grid-template-columns: 1fr; }
+  .lakeside-page .detail-stage-column { padding: 0 5.6vw; }
+  .lakeside-page .detail-copy { padding: 60px 5.6vw 0; }
+}
+@media (max-width: 700px) {
+  .lakeside-page .detail-stage-column { padding: 0 22px; }
+  .lakeside-page .detail-copy { padding: 53px 22px 0; }
+}
