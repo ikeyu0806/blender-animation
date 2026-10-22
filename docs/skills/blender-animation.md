@@ -19,6 +19,13 @@
 
 Cloudflare Pages はリポジトリのルートをビルドし、出力 `dist/` を配信する。公開に必要なCloudflareプロジェクトと認証があるときは、buildを通した同じ内容をデプロイする。認証やプロジェクトがない場合は設定手順と不足条件を報告する。pushは依頼された公開作業に必要な場合だけ行う。
 
+## 自然物を細かく作り込むとき
+
+- 制作側の [上級操作の再現手順](../../../blender-works/docs/skills/references/blender-advanced-recipes.md) で、細分化と厚み、Geometry Nodesの散布、Cyclesベイク、共有形状とGPU instancingの必要な節を読む。手順は制作側を正本とし、こちらへ複製しない。
+- 湖畔の確認済み実装は `blender-works/assets/animations/lakeside_glow/`。同手順に再生成コマンドと関数別の参照先がある。応用候補のスカルプト・投影・シミュレーションは、それぞれの対象アセットで小さく検証してから採用する。
+- Blender固有の表現は評価Mesh、PBR画像、対応するclip、runtime効果のどれで渡すか決める。静止GLBとruntimeの水面・パーティクルを、Blenderのシミュレーションを輸出したものとして説明しない。
+- 中立照明のpreviewと実際の鑑賞画面を比較する。初回読込容量、近遠のalpha輪郭、停止・再開も確認し、検査済みモデルと撮影したpreviewを内容ハッシュ付きURLで同期する。湖畔の同期には制作元の `sync_web.py` を使う。
+
 ## リアル寄りの焚き火を更新するとき
 
 - 正本は `blender-works/assets/animations/hearth_fire/`。実体の形状はBlender、炎・煙・火の粉などGLBで扱えない効果は同ディレクトリの `runtime/campfire.js` で管理する。GLBにclipがある方式と、静止GLB＋runtime方式を区別して検査・記録する。
