@@ -21,7 +21,7 @@ npm run dev
 
 音声 `public/audio/campfire-ambience.ogg` は [Campfire sound ambience](https://commons.wikimedia.org/wiki/File:Campfire_sound_ambience.ogg) by Glaneur de sons、[CC BY 3.0](https://creativecommons.org/licenses/by/3.0/)。元のOGGをそのまま掲載し、ブラウザのloop再生で使う。
 
-湖畔の正本は `blender-works/assets/animations/lakeside_glow/`。`build.py` → `validate_export.py` → `sync_web.py` の順に生成・再取り込み検査・同期する。`src/generated/lakeside.js` は正本runtimeのコピーで、直接編集しない。GLBは79,050三角形、18メッシュ、約4.9MB。静止した形状をGLBで受け渡し、水面・パーティクル・照明はruntimeが動かす。外部素材は使用していない。
+湖畔の正本は `blender-works/assets/animations/lakeside_glow/`。`build.py` → `validate_export.py` → `sync_web.py` の順に生成・再取り込み検査・同期する。`src/generated/lakeside.js` は正本runtimeのコピーで、直接編集しない。約132万三角形、16材質、PBR画像19枚、GLB約22MB。164本の木の幹・主枝・針葉と133個の石は共有形状をGPU instancingで描画し、Meshoptで圧縮する。睡蓮にはSubdivision SurfaceとSolidify、岸辺420株にはGeometry Nodes、石にはDisplace、樹皮にはCyclesのNormalベイクを使用する。静止した形状をGLBで受け渡し、水面反射・パーティクル・月光の影はruntimeが描画する。外部素材は使用していない。
 
 両作品とも、動きを減らす設定では停止状態から始まり、画面外・非表示タブでは描画を休止する。湖畔ではデスクトップ・390px幅、停止中の画像一致、再開、矢印キー・Home、動きを減らす設定、WebGL非対応・読込失敗時のプレビューを確認済み。
 

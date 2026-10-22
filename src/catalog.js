@@ -25,7 +25,7 @@ export const works = [
     lead: '湖面のゆらぎ、蛍、光の粒子。',
     alt: '月と森が映る湖、木の桟橋とランタン、漂う蛍',
     path: '/works/lakeside-glow/',
-    preview: '/previews/lakeside-glow-74a04f97ee6e.png',
-    model: '/models/lakeside-glow-fe5c4d756e57.glb',
+    preview: '/previews/lakeside-glow-ee7e99ca857e.png',
+    model: '/models/lakeside-glow-1bf1ea35148c.glb',
   },
 ];

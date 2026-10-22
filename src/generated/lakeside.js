@@ -2,6 +2,7 @@
 // All solid geometry comes from Blender. This file owns only rendering and effects.
 import * as THREE from 'three';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
+import { MeshoptDecoder } from 'three/addons/libs/meshopt_decoder.module.js';
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 import { Reflector } from 'three/addons/objects/Reflector.js';
 import { EffectComposer } from 'three/addons/postprocessing/EffectComposer.js';
@@ -19,16 +20,17 @@ function randomGenerator() {
 
 function createSky() {
   const canvas = document.createElement('canvas');
-  canvas.width = 16; canvas.height = 512;
+  // A soft twilight gradient surrounds both the scene and its water reflection.
+  canvas.width = 1024; canvas.height = 512;
   const context = canvas.getContext('2d');
   const gradient = context.createLinearGradient(0, 0, 0, 512);
-  gradient.addColorStop(0, '#070f27');
-  gradient.addColorStop(.35, '#142c46');
-  gradient.addColorStop(.49, '#526976');
-  gradient.addColorStop(.54, '#354e5c');
-  gradient.addColorStop(1, '#0a1724');
+  gradient.addColorStop(0, '#0d171f');
+  gradient.addColorStop(.35, '#263c49');
+  gradient.addColorStop(.49, '#677b7d');
+  gradient.addColorStop(.54, '#475d62');
+  gradient.addColorStop(1, '#101f27');
   context.fillStyle = gradient;
-  context.fillRect(0, 0, 16, 512);
+  context.fillRect(0, 0, canvas.width, canvas.height);
   const texture = new THREE.CanvasTexture(canvas);
   texture.mapping = THREE.EquirectangularReflectionMapping;
   texture.colorSpace = THREE.SRGBColorSpace;
@@ -175,7 +177,10 @@ export function createLakesideStage(container, modelUrl, options = {}) {
   renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 1.5));
   renderer.outputColorSpace = THREE.SRGBColorSpace;
   renderer.toneMapping = THREE.ACESFilmicToneMapping;
-  renderer.toneMappingExposure = 1.14;
+  renderer.toneMappingExposure = 1.08;
+  renderer.shadowMap.enabled = true;
+  renderer.shadowMap.type = THREE.PCFShadowMap;
+  renderer.shadowMap.autoUpdate = false;
   renderer.domElement.style.cssText = 'width:100%;height:100%;display:block;touch-action:none';
   renderer.domElement.tabIndex = 0;
   renderer.domElement.setAttribute('role', 'img');
@@ -185,7 +190,7 @@ export function createLakesideStage(container, modelUrl, options = {}) {
   const scene = new THREE.Scene();
   const sky = createSky();
   scene.background = sky;
-  scene.fog = new THREE.FogExp2('#314c5c', .008);
+  scene.fog = new THREE.FogExp2('#53686d', .009);
   const camera = new THREE.PerspectiveCamera(52, 1, .1, 330);
   const controls = new OrbitControls(camera, renderer.domElement);
   controls.enableDamping = true;
@@ -200,11 +205,16 @@ export function createLakesideStage(container, modelUrl, options = {}) {
     controls.update();
     requestDraw();
   }
-  scene.add(new THREE.HemisphereLight(0xa1c5e2, 0x1f2924, 1.45));
-  const moonlight = new THREE.DirectionalLight(0xa9cfe5, 1.8);
-  moonlight.position.set(12, 26, -12);
+  scene.add(new THREE.HemisphereLight(0xb5c5ca, 0x292b24, 1.25));
+  const moonlight = new THREE.DirectionalLight(0xc3d5dc, 1.7);
+  moonlight.position.set(21, 26, -104);
+  moonlight.castShadow = true;
+  moonlight.shadow.mapSize.set(2048, 2048);
+  Object.assign(moonlight.shadow.camera, { left: -40, right: 40, top: 40, bottom: -40, near: 1, far: 180 });
+  moonlight.shadow.bias = -.0002;
+  moonlight.shadow.normalBias = .045;
   scene.add(moonlight);
-  const fill = new THREE.DirectionalLight(0x8fb0bb, .7);
+  const fill = new THREE.DirectionalLight(0xb8c3c4, .4);
   fill.position.set(2, 8, 15);
   scene.add(fill);
   const lantern = new THREE.PointLight(0xffba66, 23, 11, 2);
@@ -214,7 +224,8 @@ export function createLakesideStage(container, modelUrl, options = {}) {
   const sparkles = createParticles(1, LAKESIDE_PARTICLES.water);
   const stars = createParticles(2, LAKESIDE_PARTICLES.stars);
   scene.add(fireflies, sparkles, stars);
-  const composer = new EffectComposer(renderer);
+  const sceneTarget = new THREE.WebGLRenderTarget(1, 1, { type: THREE.HalfFloatType, samples: 4 });
+  const composer = new EffectComposer(renderer, sceneTarget);
   composer.addPass(new RenderPass(scene, camera));
   composer.addPass(new UnrealBloomPass(new THREE.Vector2(1, 1), .48, .65, 1.05));
   composer.addPass(new OutputPass());
@@ -286,14 +297,17 @@ export function createLakesideStage(container, modelUrl, options = {}) {
     if (!visible) { cancelAnimationFrame(frame); frame = 0; } else requestDraw();
   });
   intersectionObserver.observe(container);
-  new GLTFLoader().load(modelUrl, (gltf) => {
+  new GLTFLoader().setMeshoptDecoder(MeshoptDecoder).load(modelUrl, (gltf) => {
     if (disposed) { disposeScene(gltf.scene); return; }
     const waterMesh = gltf.scene.getObjectByName('LakeWaterSurface') || gltf.scene.getObjectByName('Lake.WaterSurface');
     if (!waterMesh) { disposeScene(gltf.scene); options.onError?.(new Error('Water mesh is missing')); return; }
     gltf.scene.traverse((object) => {
       if (!object.isMesh) return;
+      object.castShadow = !object.name.includes('Moon') && !object.name.includes('WaterSurface');
+      object.receiveShadow = true;
       for (const material of (Array.isArray(object.material) ? object.material : [object.material])) {
         if (material.map) material.map.anisotropy = Math.min(8, renderer.capabilities.getMaxAnisotropy());
+        if (material.name.includes('Needles')) material.alphaToCoverage = true;
         if (material.name.includes('Reed') || material.name.includes('Lily')) material.side = THREE.DoubleSide;
         if (material.name.includes('Moon')) material.fog = false;
       }
@@ -301,6 +315,7 @@ export function createLakesideStage(container, modelUrl, options = {}) {
     scene.add(gltf.scene);
     water = createWater(waterMesh);
     scene.add(water);
+    renderer.shadowMap.needsUpdate = true;
     resize(); options.onReady?.(); requestDraw();
   }, undefined, (error) => { if (!disposed) options.onError?.(error); });
   resetView(); resize();
