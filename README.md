@@ -21,7 +21,7 @@ npm run dev
 
 ## Cloudflare Pages
 
-出力は静的な `dist/`。Pagesプロジェクト名は `blender-animation`、production branchは `main`。GitHub Actionsはmainへのpush時に `npm ci` と `npm run build` を実行し、成功した内容をCloudflare Pagesへデプロイする。リポジトリのSecretsに `CLOUDFLARE_API_TOKEN`（Pages編集権限）と `CLOUDFLARE_ACCOUNT_ID` を設定する。
+公開URLは [blender-animation.pages.dev](https://blender-animation.pages.dev/)。出力は静的な `dist/`。Pagesプロジェクト名は `blender-animation`、production branchは `main`。GitHub Actionsはmainへのpush時に `npm ci` と `npm run build` を実行する。リポジトリのSecretsに `CLOUDFLARE_API_TOKEN`（Pages編集権限）と `CLOUDFLARE_ACCOUNT_ID` があれば、ビルド成功後にCloudflare Pagesへ自動デプロイする。Secretsがない間はビルドのみ行い、公開は手元の認証環境から実行する。
 
 手元から同じビルドを直接公開するときは、Cloudflare認証済みの環境で次を実行する。
 
