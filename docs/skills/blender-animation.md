@@ -18,3 +18,12 @@
 ## 公開
 
 Cloudflare Pages はリポジトリのルートをビルドし、出力 `dist/` を配信する。公開に必要なCloudflareプロジェクトと認証があるときは、buildを通した同じ内容をデプロイする。認証やプロジェクトがない場合は設定手順と不足条件を報告する。pushは依頼された公開作業に必要な場合だけ行う。
+
+## リアル寄りの焚き火を更新するとき
+
+- 正本は `blender-works/assets/animations/hearth_fire/`。実体の形状はBlender、炎・煙・火の粉などGLBで扱えない効果は同ディレクトリの `runtime/campfire.js` で管理する。GLBにclipがある方式と、静止GLB＋runtime方式を区別して検査・記録する。
+- 樹皮・年輪・炭化・石の粗さは、形状、Normal、Roughness、Emissionの役割を分けて作る。glTFへ渡らない手続き材質は画像化し、Modifierは評価して書き出す。近接度に合わせて画像解像度を変える。
+- `build.py` → `validate_export.py` の後、中立照明のBlender previewと実際のWeb表示を確認する。炎は薪との前後関係、火の粉は発生・上昇・消滅、停止は全効果と照明に効くかを確認する。
+- Web画面から `output/hearth_fire/previews/beauty.png` を保存し、`sync_web.py` で両Web実装へ同じruntimeをコピーする。続けて `python3 -m pipeline.catalog.publish` でBlender works側のカタログを生成する。
+- `public/models` と `public/previews` は長期キャッシュ対象なので、差し替えは内容ハッシュ付きの新しいURLにする。旧版は配信対象から外す。
+- UIの文言は「Blenderアニメーション集」「焚き火」「炎・火の粉・煙」程度の説明に留め、詩的な宣伝文句は加えない。

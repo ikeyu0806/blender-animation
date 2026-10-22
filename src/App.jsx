@@ -39,7 +39,7 @@ function Catalog() {
         <div className="hero-art">
           <div className="hero-halo" />
           <img src={asset(fire.preview)} alt="石と薪に囲まれた焚き火" />
-          <div className="hero-art-note"><span>01 / 焚き火</span><span>3秒ループ</span></div>
+          <div className="hero-art-note"><span>01 / 焚き火</span><span>連続再生</span></div>
         </div>
         <div className="hero-vertical" aria-hidden="true">作品一覧 <span>↓</span></div>
       </section>
@@ -77,11 +77,11 @@ function Detail() {
       <section className="detail-head"><a className="back-link" href="/">← <span>作品一覧へ戻る</span></a><span>01 / 焚き火</span></section>
       <section className="detail-content" aria-labelledby="detail-title">
         <div className="detail-stage-column">
-          <div className="detail-stage-frame"><Suspense fallback={<div className="stage-message" role="status">焚き火を準備しています…</div>}><FireStage model={asset(fire.model)} playing={playing} /></Suspense><span className="stage-corner top-left">BLENDER / 001</span><span className="stage-corner bottom-right">ドラッグで視点変更</span></div>
+          <div className="detail-stage-frame"><Suspense fallback={<div className="stage-message" role="status">焚き火を準備しています…</div>}><FireStage model={asset(fire.model)} preview={asset(fire.preview)} playing={playing} /></Suspense><span className="stage-corner top-left">BLENDER / 001</span><span className="stage-corner bottom-right">ドラッグで視点変更</span></div>
           <div className="stage-controls"><div className="control-buttons"><button type="button" onClick={() => setPlaying((value) => !value)} aria-pressed={playing}><span aria-hidden="true">{playing ? 'Ⅱ' : '▶'}</span> {playing ? '動きを止める' : '動かす'}</button><button type="button" onClick={() => setSound((value) => !value)} aria-pressed={sound}><span aria-hidden="true">{sound ? '◖))' : '◖'}</span> {sound ? '音を消す' : '焚き火の音を聴く'}</button></div><span>ドラッグで角度を変えられます</span></div>
           <audio ref={audio} src={asset(fire.audio)} loop preload="none" />
         </div>
-        <div className="detail-copy"><div className="detail-eyebrow">ANIMATION 001 <span>—</span> LOOP</div><h1 id="detail-title">焚き火</h1><p className="detail-english">CAMPFIRE</p><div className="detail-rule" /><p className="detail-lead">炎と火の粉が動く焚き火。</p><p className="detail-description">3秒のループアニメーションです。再生・停止、音のオン・オフ、視点変更ができます。</p><div className="detail-spec"><div><span>再生時間</span><strong>3秒ループ</strong></div><div><span>制作</span><strong>Blender</strong></div><div><span>表示</span><strong>Three.js</strong></div></div></div>
+        <div className="detail-copy"><div className="detail-eyebrow">ANIMATION 001 <span>—</span> CONTINUOUS</div><h1 id="detail-title">焚き火</h1><p className="detail-english">CAMPFIRE</p><div className="detail-rule" /><p className="detail-lead">炎・火の粉・煙。</p><p className="detail-description">再生・停止、音、視点を変更できます。</p><div className="detail-spec"><div><span>再生時間</span><strong>連続再生</strong></div><div><span>制作</span><strong>Blender</strong></div><div><span>表示</span><strong>Three.js</strong></div></div></div>
       </section>
       <section className="detail-after"><div><h2>音声素材</h2><p>“Campfire sound ambience” by Glaneur de sons · <a href="https://commons.wikimedia.org/wiki/File:Campfire_sound_ambience.ogg" target="_blank" rel="noreferrer">CC BY 3.0</a>。元の録音をループ再生します。</p></div><a href="/" className="return-link">作品一覧へ戻る <Arrow /></a></section>
     </main>

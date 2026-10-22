@@ -50,7 +50,7 @@ button, a { -webkit-tap-highlight-color: transparent; }
 .work-grid { display: grid; grid-template-columns: minmax(0, 680px); gap: 28px; }
 .work-card { display: block; min-width: 0; }
 .work-image { background: radial-gradient(circle at 50% 54%, #4e3930 0, #282a27 50%, #1a211f 100%); aspect-ratio: 1.57; position: relative; overflow: hidden; display: grid; place-items: center; }
-.work-image img { height: 120%; width: 100%; object-fit: contain; transition: transform .4s ease; }
+.work-image img { height: 100%; width: 100%; object-fit: contain; transition: transform .4s ease; }
 .work-card:hover .work-image img { transform: scale(1.05); }
 .work-play { position: absolute; right: 22px; bottom: 22px; width: 42px; height: 42px; display: grid; place-items: center; border-radius: 50%; border: 1px solid #e8dbc9a8; color: #fff5e4; font-size: 23px; }
 .work-meta { display: flex; justify-content: space-between; color: #8d9388; padding-top: 19px; font-size: 9px; letter-spacing: .14em; }
@@ -157,3 +157,6 @@ button, a { -webkit-tap-highlight-color: transparent; }
   .return-link { margin-top: 30px; width: fit-content; }
 }
 @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } .work-image img, .control-buttons button, .site-header nav a { transition: none; } }
+
+.hero-art img { mask-image: radial-gradient(ellipse at 50% 53%, #000 57%, transparent 76%); }
+.work-image { background: #111619; }
