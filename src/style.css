@@ -178,3 +178,87 @@ button, a { -webkit-tap-highlight-color: transparent; }
   .lakeside-page .detail-stage-column { padding: 0 22px; }
   .lakeside-page .detail-copy { padding: 53px 22px 0; }
 }
+
+.garden-page { background: #0b131b; color: #f3efe3; min-height: 100svh; }
+.garden-header { height: 76px; padding: 0 4vw; display: flex; align-items: center; justify-content: space-between; gap: 20px; border-bottom: 1px solid #c0cdd41c; font-size: 10px; letter-spacing: .15em; color: #acb9c0; }
+.garden-header a { display: flex; gap: 15px; align-items: center; min-height: 44px; color: #eee8db; }
+.garden-wordmark { font-size: 9px; letter-spacing: .22em; }
+.garden-wordmark i { font-style: normal; color: #b59962; margin: 0 13px; }
+.garden-theatre { height: min(850px, calc(100svh - 76px)); min-height: 590px; position: relative; isolation: isolate; overflow: hidden; background: #071019; }
+.garden-theatre:fullscreen, .garden-theatre.is-expanded { width: 100vw; height: 100dvh; min-height: 0; }
+.garden-theatre.is-expanded { position: fixed; inset: 0; z-index: 100; }
+.garden-canvas, .garden-canvas canvas, .garden-preview { width: 100%; height: 100%; display: block; }
+.garden-canvas { position: absolute; inset: 0; }
+.garden-canvas canvas { touch-action: none; cursor: grab; }
+.garden-canvas canvas:active { cursor: grabbing; }
+.garden-canvas canvas:focus-visible { outline: 2px solid #d9c28c; outline-offset: -5px; }
+.garden-preview { position: absolute; inset: 0; object-fit: cover; }
+.garden-shade { position: absolute; inset: 0; pointer-events: none; background: linear-gradient(#050e1a80 0, transparent 38%, transparent 65%, #040b16b8 100%); }
+.garden-title { position: absolute; left: 4vw; top: 36px; pointer-events: none; text-shadow: 0 2px 18px #0008; }
+.garden-title p { font-size: 8px; letter-spacing: .26em; color: #d4c399; margin: 0 0 17px; }
+.garden-title p span { margin-left: 20px; padding-left: 20px; border-left: 1px solid #aa9f86; }
+.garden-title h1 { font-family: 'Shippori Mincho', serif; font-size: clamp(34px, 3.3vw, 52px); font-weight: 400; letter-spacing: .16em; line-height: 1.4; margin: 0 0 12px; }
+.garden-title > span { color: #d0d5d7; font-size: 8px; letter-spacing: .3em; }
+.garden-badge { position: absolute; top: 44px; right: 4vw; display: flex; align-items: center; gap: 9px; color: #d4d9d8; font-size: 8px; letter-spacing: .19em; }
+.garden-badge > span { width: 5px; height: 5px; border-radius: 50%; background: #d2b377; box-shadow: 0 0 12px #f2c65e60; }
+.garden-status { position: absolute; top: 46%; left: 50%; transform: translate(-50%, -50%); width: min(80%, 380px); padding: 17px 24px; background: #09131de8; color: #e1e5e5; font-size: 12px; line-height: 1.9; text-align: center; border: 1px solid #b1c1cb35; }
+.garden-status button { display: block; margin: 12px auto 0; background: transparent; border: 1px solid #b1c1cb70; color: inherit; padding: 9px 15px; }
+.garden-toolbar { position: absolute; bottom: 25px; left: 50%; transform: translateX(-50%); width: max-content; max-width: calc(100% - 40px); }
+.garden-toolbar-main { display: flex; align-items: center; padding: 7px 10px; gap: 7px; background: #0b1625ed; border: 1px solid #bfd3df38; border-radius: 7px; box-shadow: 0 12px 40px #0004; }
+.garden-toolbar button { min-height: 44px; border: 0; color: #c2cbd0; background: transparent; font-size: 11px; border-radius: 3px; white-space: nowrap; transition: background .2s, color .2s; }
+.garden-toolbar button:hover { background: #ffffff12; color: #fff; }
+.garden-toolbar button:disabled { opacity: .45; cursor: default; }
+.garden-toolbar .garden-play { min-width: 112px; padding: 0 13px; display: flex; align-items: center; justify-content: center; gap: 11px; color: #f1e7d1; }
+.garden-play span { color: #d8ba80; font-size: 17px; }
+.garden-control-divider { width: 1px; height: 23px; background: #c4d0dc2e; margin: 0 6px; }
+.garden-view-switch { display: flex; gap: 3px; }
+.garden-view-switch button { padding: 0 14px; }
+.garden-view-switch button[aria-pressed='true'] { color: #f0e4ca; background: #c0aa7a20; }
+.garden-icon-button { min-width: 44px; font-size: 22px !important; }
+.garden-toolbar > p { display: flex; justify-content: space-between; color: #d4dce1; font-size: 9px; letter-spacing: .05em; margin: 13px 4px 0; text-shadow: 0 1px 8px #000; }
+.garden-toolbar > p span { color: #acb8c1; }
+.garden-notes { padding: 76px 6vw 82px; display: grid; grid-template-columns: 1fr 1.25fr auto; gap: 50px; max-width: 1500px; margin: auto; }
+.garden-section-label { color: #bba776; font-size: 8px; letter-spacing: .23em; margin: 0 0 22px; }
+.garden-note-intro h2 { font-family: 'Shippori Mincho', serif; font-size: 27px; letter-spacing: .06em; line-height: 1.9; font-weight: 400; margin: 0; }
+.garden-note-body { padding-top: 28px; color: #aebcc5; font-size: 12px; line-height: 2.3; }
+.garden-note-body > p { margin: 0 0 18px; }
+.garden-note-body details { border-top: 1px solid #c6d1d826; padding-top: 17px; margin-top: 27px; font-size: 10px; }
+.garden-note-body summary { cursor: pointer; color: #d3c29c; width: fit-content; }
+.garden-note-body details a { color: #d3c29c; text-decoration: underline; text-underline-offset: 4px; }
+.garden-work-number { color: #6d7d8b22; font-size: 100px; font-weight: 400; padding-top: 32px; letter-spacing: -.07em; }
+.garden-footer { margin: 0 4vw; border-top: 1px solid #c0cdd420; min-height: 85px; display: flex; justify-content: space-between; align-items: center; gap: 24px; color: #8c9ca8; font-size: 10px; }
+.garden-footer a { color: #d4d8d7; }
+.garden-footer i { font-style: normal; margin-left: 25px; font-size: 8px; }
+@media (max-width: 700px) {
+  .garden-header { height: 64px; padding: 0 22px; font-size: 9px; }
+  .garden-wordmark { font-size: 7px; letter-spacing: .1em; }
+  .garden-wordmark i { margin: 0 5px; }
+  .garden-header > span:last-child { display: none; }
+  .garden-theatre { height: calc(100svh - 64px); min-height: 560px; max-height: 900px; }
+  .garden-theatre:fullscreen, .garden-theatre.is-expanded { max-height: none; }
+  .garden-title { top: 28px; left: 24px; }
+  .garden-title p { font-size: 7px; margin-bottom: 12px; }
+  .garden-title h1 { font-size: 36px; }
+  .garden-badge { display: none; }
+  .garden-toolbar { bottom: 22px; width: calc(100% - 32px); max-width: 370px; }
+  .garden-toolbar-main { flex-wrap: wrap; justify-content: center; padding: 7px; gap: 3px; }
+  .garden-toolbar .garden-play { min-width: 100px; }
+  .garden-control-divider { display: none; }
+  .garden-view-switch { order: 1; flex-basis: 100%; justify-content: center; border-top: 1px solid #d6e3ec17; padding-top: 4px; }
+  .garden-view-switch button { flex: 1; font-size: 10px; }
+  .garden-toolbar > p { font-size: 8px; gap: 12px; margin-top: 10px; }
+  .garden-notes { grid-template-columns: 1fr; padding: 51px 24px; gap: 10px; }
+  .garden-note-intro h2 { font-size: 25px; }
+  .garden-note-body { padding-top: 18px; font-size: 11px; }
+  .garden-work-number { display: none; }
+  .garden-footer { margin: 0 24px; font-size: 9px; }
+  .garden-footer i { display: none; }
+}
+@media (max-height: 500px) and (orientation: landscape) {
+  .garden-theatre { min-height: 360px; }
+  .garden-title { top: 20px; }
+  .garden-title h1 { font-size: 28px; }
+  .garden-title p, .garden-title > span { display: none; }
+  .garden-toolbar { bottom: 12px; }
+}
+@media (prefers-reduced-motion: reduce) { .garden-toolbar button { transition: none; } }

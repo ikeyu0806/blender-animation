@@ -5,6 +5,7 @@ const fire = works[0];
 const asset = (path) => `${import.meta.env.BASE_URL}${path.replace(/^\//, '')}`;
 const FireStage = lazy(() => import('./FireStage.jsx'));
 const LakeStage = lazy(() => import('./LakeStage.jsx'));
+const GardenExperience = lazy(() => import('./GardenExperience.jsx'));
 
 function Mark() {
   return <span className="mark" aria-hidden="true"><svg viewBox="0 0 32 32" fill="none"><path d="M16 3c3.6 5.8-.8 8.6 2.2 13.3 1-3.3 4.8-5.7 5.1-7 6 10.8 2 19.7-7.3 19.7C6.2 29 2 20.4 7.7 12.9c.1 4.4 2.1 6.3 4.8 7C11.2 12 13.4 7.7 16 3Z" stroke="currentColor" strokeWidth="1.4"/><path d="M16 16c1.6 3.4-.9 5 1.2 7 1-1.8 2-3.4 2.4-4.3 2.3 4.8-.3 8-3.6 8-4.2 0-6-4.1-3.1-7.2 0 2.2 1.2 3.2 2.5 3.8-.4-4.1.6-6 3-8.3Z" fill="currentColor"/></svg></span>;
@@ -104,5 +105,6 @@ function Detail({ work }) {
 export default function App() {
   const pathname = window.location.pathname.replace(/\/+$/, '');
   const work = works.find((entry) => asset(entry.path).replace(/\/+$/, '') === pathname);
+  if (work?.id === 'nocturnal-garden') return <Suspense fallback={<div className="stage-message" role="status">夜の花園を準備しています…</div>}><GardenExperience work={work} /></Suspense>;
   return work ? <Detail work={work} /> : <Catalog />;
 }

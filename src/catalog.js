@@ -28,4 +28,18 @@ export const works = [
     preview: '/previews/lakeside-glow-ee7e99ca857e.png',
     model: '/models/lakeside-glow-1bf1ea35148c.glb',
   },
+  {
+    id: 'nocturnal-garden',
+    number: '03',
+    title: '夜の花園',
+    english: 'Nocturnal Garden',
+    category: '没入型絵画',
+    duration: '48秒ループ',
+    description: '壁と床に広がる絵画。水面のゆらぎと、漂う花びら。',
+    lead: '絵画に包まれる、小さな展示室。',
+    alt: '藍色の花園の絵画が壁と床いっぱいに広がる展示空間',
+    path: '/works/nocturnal-garden/',
+    preview: '/previews/nocturnal-garden-fca4bf0c5960.jpg',
+    model: '/models/nocturnal-garden-1ad7dc55539e.glb',
+  },
 ];

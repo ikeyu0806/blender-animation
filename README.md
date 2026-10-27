@@ -1,6 +1,6 @@
 # Blenderアニメーション集
 
-Blenderで制作したアニメーションをThree.jsで再生するカタログ。「焚き火」と「湖畔」を掲載。作品一覧から鑑賞画面へ進み、再生・停止とドラッグによる視点変更ができる。
+Blenderで制作したアニメーションをThree.jsで再生するカタログ。「焚き火」「湖畔」「夜の花園」を掲載。作品一覧から鑑賞画面へ進み、再生・停止とドラッグによる視点変更ができる。
 
 「湖畔」は月明かりの湖、森、桟橋とランタンに、蛍720個・湖面の光1000個・星360個を重ねた48秒ループ。湖面は周囲の景色を反射する。矢印キーで視点変更、Homeキーまたはボタンで視点を戻せる。音声は焚き火だけに用意している。
 
@@ -13,7 +13,7 @@ npm ci
 npm run dev
 ```
 
-表示されたURLで一覧 `/` と作品 `/works/hearth-fire/`、`/works/lakeside-glow/` を開く。公開用の確認は `npm run build`、`npm run preview`。
+表示されたURLで一覧 `/` と作品 `/works/hearth-fire/`、`/works/lakeside-glow/`、`/works/nocturnal-garden/` を開く。公開用の確認は `npm run build`、`npm run preview`。
 
 ## モデルの制作と掲載
 
@@ -24,6 +24,14 @@ npm run dev
 湖畔の正本は `blender-works/assets/animations/lakeside_glow/`。`build.py` → `validate_export.py` → `sync_web.py` の順に生成・再取り込み検査・同期する。`src/generated/lakeside.js` は正本runtimeのコピーで、直接編集しない。約132万三角形、16材質、PBR画像19枚、GLB約22MB。164本の木の幹・主枝・針葉と133個の石は共有形状をGPU instancingで描画し、Meshoptで圧縮する。睡蓮にはSubdivision SurfaceとSolidify、岸辺420株にはGeometry Nodes、石にはDisplace、樹皮にはCyclesのNormalベイクを使用する。静止した形状をGLBで受け渡し、水面反射・パーティクル・月光の影はruntimeが描画する。外部素材は使用していない。
 
 両作品とも、動きを減らす設定では停止状態から始まり、画面外・非表示タブでは描画を休止する。湖畔ではデスクトップ・390px幅、停止中の画像一致、再開、矢印キー・Home、動きを減らす設定、WebGL非対応・読込失敗時のプレビューを確認済み。
+
+## 夜の花園
+
+新しく生成したオリジナルの絵画を3つの壁面と床に広げた没入型展示。水面と枝のゆらぎ、色温度、54枚の花びらが48秒で巡る。空間・近景の切替、全画面（非対応時はページ内拡大）、再生・停止、ドラッグ・矢印キー・Homeに対応。音声なし。画像はOpenAIの組み込み画像生成で制作し、既存作品や参考施設の映像・画像・音楽は使っていない。[素材の制作記録と生成プロンプト](docs/assets/nocturnal-garden.md)を保存し、鑑賞画面からも参照できる。
+
+制作元は `blender-works/assets/animations/nocturnal_garden/`。`build.py` → `validate_export.py` → `sync_web.py` で生成・再取込検査・同期する。65 Mesh、130三角形、5材質、画像1枚、GLB約4.3MB。静止GLBの形状とUVはBlenderが所有し、`src/generated/garden.js` は制作元runtimeのコピー。ゆらぎ・花びらの運動を実行時に描画するためGLB内にclipはない。
+
+1440px・390px表示、44px以上の操作ボタン、停止画像の一致・再開、視点切替・キーボード・全画面・拡大表示、動きを減らす設定、WebGL非対応・GLB読込失敗時のプレビューを確認。画像とGLBには内容ハッシュ付きURLを使用する。
 
 ## Cloudflare Pages
 
