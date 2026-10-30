@@ -42,4 +42,22 @@ export const works = [
     preview: '/previews/nocturnal-garden-fca4bf0c5960.jpg',
     model: '/models/nocturnal-garden-1ad7dc55539e.glb',
   },
+  // shoryaku-promo:start
+  {
+    "id": "shoryaku-promo",
+    "number": "04",
+    "title": "商略AI",
+    "english": "Shoryaku AI",
+    "category": "プロモーションムービー",
+    "duration": "20秒",
+    "description": "青いワンピースの女の子が案内する、商略AIの20秒ムービー。",
+    "lead": "その数字、次の一手に。",
+    "alt": "青いワンピースの女の子と商略AIの無料体験案内",
+    "path": "/works/shoryaku-promo/",
+    "preview": "/previews/shoryaku-promo-c99f2a79f170.png",
+    "model": "/models/shoryaku-promo-0bd3f8045d29.glb",
+    "video": "/media/shoryaku-promo-1e0935011528.mp4",
+    "captions": "/media/shoryaku-promo-50a865fa407a.vtt"
+  },
+  // shoryaku-promo:end
 ];

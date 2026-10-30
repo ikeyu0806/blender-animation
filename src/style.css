@@ -262,3 +262,52 @@ button, a { -webkit-tap-highlight-color: transparent; }
   .garden-toolbar { bottom: 12px; }
 }
 @media (prefers-reduced-motion: reduce) { .garden-toolbar button { transition: none; } }
+
+.promo-page { min-height: 100svh; background: #f4f6f9; color: #23364f; }
+.promo-page :focus-visible { outline-color: #947024; }
+.promo-header, .promo-footer { display: flex; align-items: center; justify-content: space-between; gap: 24px; padding: 20px 5.6vw; border-bottom: 1px solid #23364f25; font-size: 11px; letter-spacing: .12em; }
+.promo-header a, .promo-footer a { display: flex; align-items: center; min-height: 44px; }
+.promo-main { width: min(1400px, 88.8vw); margin: auto; padding: 54px 0 72px; }
+.promo-heading { display: flex; justify-content: space-between; align-items: end; gap: 24px; margin-bottom: 26px; }
+.promo-heading p { font-size: 10px; letter-spacing: .18em; color: #92712f; }
+.promo-heading h1 { font-size: clamp(22px, 2.5vw, 38px); font-weight: 500; margin: 15px 0 0; }
+.promo-heading > span { font-size: 11px; color: #637287; white-space: nowrap; }
+.promo-switch { display: flex; gap: 8px; margin: 0 0 18px; }
+.promo-switch button, .promo-scene-controls button { min-height: 44px; padding: 10px 20px; border-radius: 4px; border: 1px solid #bac4d0; background: transparent; color: #23364f; font-size: 12px; }
+.promo-switch button[aria-pressed='true'], .promo-scene-controls button[aria-pressed='true'] { background: #23364f; border-color: #23364f; color: white; }
+.promo-video { width: 100%; height: auto; display: block; aspect-ratio: 16/9; background: #eaf1fa; border: 1px solid #23364f15; }
+.promo-player-note { display: flex; align-items: center; justify-content: space-between; gap: 16px; font-size: 11px; color: #607087; padding-top: 12px; }
+.promo-player-note a { text-decoration: underline; text-underline-offset: 5px; min-height: 44px; display: inline-flex; align-items: center; }
+.promo-info { display: grid; grid-template-columns: 1fr 1.2fr; gap: 10%; border-top: 1px solid #23364f25; margin-top: 55px; padding-top: 40px; }
+.promo-kicker { font-size: 12px; color: #92712f; }
+.promo-info h2 { font-size: clamp(23px, 2.6vw, 35px); font-weight: 500; line-height: 1.8; margin: 14px 0; }
+.promo-info > div > p:not(.promo-kicker) { font-size: 13px; color: #607087; line-height: 2; }
+.promo-brand-link { display: inline-flex; align-items: center; min-height: 44px; margin-top: 12px; border-bottom: 1px solid #947024; font-size: 13px; }
+.promo-transcript { margin-top: 40px; border-top: 1px solid #23364f25; padding-top: 16px; font-size: 12px; line-height: 2; color: #607087; }
+.promo-transcript summary { cursor: pointer; min-height: 44px; color: #23364f; }
+.promo-transcript a { text-decoration: underline; }
+.promo-footer { border-top: 1px solid #23364f25; border-bottom: 0; color: #637287; }
+.promo-scene { position: relative; aspect-ratio: 16/9; background: #edf3fa; }
+.promo-canvas, .promo-canvas canvas { width: 100%; height: 100%; display: block; }
+.promo-scene > img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; }
+.promo-scene-status { position: absolute; left: 50%; top: 45%; transform: translate(-50%, -50%); margin: 0; width: min(80%, 440px); padding: 16px; background: #23364fed; color: white; font-size: 12px; line-height: 1.8; text-align: center; }
+.promo-scene-controls { display: flex; align-items: center; flex-wrap: wrap; gap: 12px; padding-top: 16px; }
+.promo-scene-controls button:disabled { opacity: .5; cursor: default; }
+.promo-scene-controls label { flex: 1; display: flex; align-items: center; gap: 15px; min-width: 200px; font-size: 11px; }
+.promo-scene-controls input { flex: 1; min-width: 80px; min-height: 44px; accent-color: #23364f; }
+.promo-scene-controls output { font-size: 11px; min-width: 90px; text-align: right; font-variant-numeric: tabular-nums; }
+@media (max-width: 700px) {
+  .promo-header, .promo-footer { padding: 12px 20px; font-size: 9px; letter-spacing: .04em; gap: 12px; }
+  .promo-header > span:last-child { display: none; }
+  .promo-main { width: calc(100% - 32px); padding-top: 30px; }
+  .promo-heading { display: block; }
+  .promo-heading h1 { margin: 10px 0; font-size: 24px; }
+  .promo-heading > span { font-size: 10px; }
+  .promo-switch button { flex: 1; padding: 10px 8px; font-size: 11px; }
+  .promo-player-note { align-items: start; flex-direction: column; gap: 0; font-size: 10px; }
+  .promo-info { grid-template-columns: 1fr; gap: 12px; margin-top: 32px; padding-top: 25px; }
+  .promo-info > div > p:not(.promo-kicker) { font-size: 12px; }
+  .promo-scene-controls { gap: 8px; }
+  .promo-scene-controls button { font-size: 11px; }
+  .promo-scene-controls label { flex-basis: calc(100% - 100px); }
+}

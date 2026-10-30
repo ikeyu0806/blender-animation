@@ -1,6 +1,6 @@
 # Blenderアニメーション集
 
-Blenderで制作したアニメーションをThree.jsで再生するカタログ。「焚き火」「湖畔」「夜の花園」を掲載。作品一覧から鑑賞画面へ進み、再生・停止とドラッグによる視点変更ができる。
+Blenderで制作したアニメーションをThree.jsで再生するカタログ。「焚き火」「湖畔」「夜の花園」「商略AI」を掲載。作品一覧から鑑賞画面へ進み、再生・停止とドラッグによる視点変更ができる。
 
 「湖畔」は月明かりの湖、森、桟橋とランタンに、蛍720個・湖面の光1000個・星360個を重ねた48秒ループ。湖面は周囲の景色を反射する。矢印キーで視点変更、Homeキーまたはボタンで視点を戻せる。音声は焚き火だけに用意している。
 
@@ -45,3 +45,11 @@ npx wrangler pages deploy dist --project-name blender-animation --branch main
 ```
 
 Cloudflare Pagesへの初回登録時は、プロジェクトのproduction branchを `main` にする。`dist/` と `node_modules/` はGitに含めない。
+
+## 商略AI プロモーション
+
+`/works/shoryaku-promo/` に20秒・1920×1080・24fpsのBlenderムービーを掲載。青いワンピースの女の子が、事業情報・連携データ・検索市場から施策提案へ案内する。MP4はオリジナルBGM付きで、自動再生しない。再生・停止・音量・全画面・ダウンロードに対応。日本語字幕トラックと文章による内容説明を用意する。
+
+3D版も同じページから選べる。Blender製の人物・舞台・字幕・カメラの`ShoryakuPromo` clipをThree.jsで一度再生し、最後の画面で停止する。停止・再開・最初に戻す・キーボードによるシークが可能。WebGL非対応・読込失敗時はポスターと案内を表示する。画面外と非表示タブでは3D描画を休止する。3Dの照明はWeb向けのため、完成映像はMP4を参照する。
+
+制作元は `blender-works/assets/animations/shoryaku_promo/`。`build.py`、`validate_export.py`、Blender連番レンダー、`finish.py`、`sync_web.py` の順に実行する。90,295三角形、69 Mesh、21材質、134骨、GLB約10.5MB。保存BlendとGLBの主要関節位置を照合した。素材・音楽・フォント・価格情報の確認日は[制作記録](docs/assets/shoryaku-promo.md)に記載。
