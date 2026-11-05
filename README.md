@@ -1,55 +1,17 @@
-# Blenderアニメーション集
+# Blender映像作品集
 
-Blenderで制作したアニメーションをThree.jsで再生するカタログ。「焚き火」「湖畔」「夜の花園」「商略AI」を掲載。作品一覧から鑑賞画面へ進み、再生・停止とドラッグによる視点変更ができる。
+Blenderで制作したCMや短い映像作品を鑑賞するカタログです。現在は青いワンピースの女の子が商略AIを紹介する[20秒のプロモーションムービー](https://blender-animation.pages.dev/works/shoryaku-promo/)を掲載しています。ムービーと、同じBlenderアニメーションを再生する3D版があります。音声はありません。
 
-「湖畔」は月明かりの湖、森、桟橋とランタンに、蛍720個・湖面の光1000個・星360個を重ねた48秒ループ。湖面は周囲の景色を反射する。矢印キーで視点変更、Homeキーまたはボタンで視点を戻せる。音声は焚き火だけに用意している。
+焚き火・湖畔・夜の花園は、視点を操作できる空間として [`threejs-worlds`](../threejs-worlds/README.md) に移しました。旧作品URLから新しいワールドへ転送します。これらの3Dモデルの正本とモデルカタログは [`blender-works`](../blender-works/README.md) にあります。
 
 ## ローカルで見る
 
-Node.js 22.12以降を使う。
+Node.js 22.12以降を使い、`npm ci` の後に `npm run dev` を実行します。`/` で映像一覧、`/works/shoryaku-promo/` でCMを開けます。公開用の確認は `npm run build` と `npm run preview` です。
 
-```sh
-npm ci
-npm run dev
-```
+## 制作
 
-表示されたURLで一覧 `/` と作品 `/works/hearth-fire/`、`/works/lakeside-glow/`、`/works/nocturnal-garden/` を開く。公開用の確認は `npm run build`、`npm run preview`。
+正本は `blender-works/assets/animations/shoryaku_promo/` にあります。`build.py` で顔・手・カメラを含む20秒のSceneを再生成し、`validate_export.py` で保存BlendとGLBを照合します。Blenderの連番を `finish.py` で音声なしのMP4にし、`sync_web.py` で検査済みアセットをこのリポジトリへ同期します。制作・掲載の手順は [開発ガイド](docs/skills/blender-animation.md) と [制作記録](docs/assets/shoryaku-promo.md)を参照してください。
 
-## モデルの制作と掲載
+## 公開
 
-制作ソースは隣の `blender-works/assets/animations/hearth_fire/` にあり、Blender backgroundで `.blend`、GLB、preview、検査reportを再生成する。このリポジトリの `public/models/hearth-fire-<hash>.glb` と `public/previews/hearth-fire-<hash>.png` は検査済みのコピー。形状を変更するときは `blender-works` 側で修正・検査・commitしてから、こちらへコピーする。`src/generated/campfire.js` は同じ制作元の `runtime/campfire.js` を同期したもの。GLBは静止した実体モデルで、炎・火の粉・煙はこのruntimeが描画する。同期は制作元の `sync_web.py` を使う。詳しい手順は [開発skill](docs/skills/blender-animation.md) に記載。
-
-音声 `public/audio/campfire-ambience.ogg` は [Campfire sound ambience](https://commons.wikimedia.org/wiki/File:Campfire_sound_ambience.ogg) by Glaneur de sons、[CC BY 3.0](https://creativecommons.org/licenses/by/3.0/)。元のOGGをそのまま掲載し、ブラウザのloop再生で使う。
-
-湖畔の正本は `blender-works/assets/animations/lakeside_glow/`。`build.py` → `validate_export.py` → `sync_web.py` の順に生成・再取り込み検査・同期する。`src/generated/lakeside.js` は正本runtimeのコピーで、直接編集しない。約132万三角形、16材質、PBR画像19枚、GLB約22MB。164本の木の幹・主枝・針葉と133個の石は共有形状をGPU instancingで描画し、Meshoptで圧縮する。睡蓮にはSubdivision SurfaceとSolidify、岸辺420株にはGeometry Nodes、石にはDisplace、樹皮にはCyclesのNormalベイクを使用する。静止した形状をGLBで受け渡し、水面反射・パーティクル・月光の影はruntimeが描画する。外部素材は使用していない。
-
-両作品とも、動きを減らす設定では停止状態から始まり、画面外・非表示タブでは描画を休止する。湖畔ではデスクトップ・390px幅、停止中の画像一致、再開、矢印キー・Home、動きを減らす設定、WebGL非対応・読込失敗時のプレビューを確認済み。
-
-## 夜の花園
-
-新しく生成したオリジナルの絵画を3つの壁面と床に広げた没入型展示。水面と枝のゆらぎ、色温度、54枚の花びらが48秒で巡る。空間・近景の切替、全画面（非対応時はページ内拡大）、再生・停止、ドラッグ・矢印キー・Homeに対応。音声なし。画像はOpenAIの組み込み画像生成で制作し、既存作品や参考施設の映像・画像・音楽は使っていない。[素材の制作記録と生成プロンプト](docs/assets/nocturnal-garden.md)を保存し、鑑賞画面からも参照できる。
-
-制作元は `blender-works/assets/animations/nocturnal_garden/`。`build.py` → `validate_export.py` → `sync_web.py` で生成・再取込検査・同期する。65 Mesh、130三角形、5材質、画像1枚、GLB約4.3MB。静止GLBの形状とUVはBlenderが所有し、`src/generated/garden.js` は制作元runtimeのコピー。ゆらぎ・花びらの運動を実行時に描画するためGLB内にclipはない。
-
-1440px・390px表示、44px以上の操作ボタン、停止画像の一致・再開、視点切替・キーボード・全画面・拡大表示、動きを減らす設定、WebGL非対応・GLB読込失敗時のプレビューを確認。画像とGLBには内容ハッシュ付きURLを使用する。
-
-## Cloudflare Pages
-
-公開URLは [blender-animation.pages.dev](https://blender-animation.pages.dev/)。出力は静的な `dist/`。Pagesプロジェクト名は `blender-animation`、production branchは `main`。GitHub Actionsはmainへのpush時に `npm ci` と `npm run build` を実行する。リポジトリのSecretsに `CLOUDFLARE_API_TOKEN`（Pages編集権限）と `CLOUDFLARE_ACCOUNT_ID` があれば、ビルド成功後にCloudflare Pagesへ自動デプロイする。Secretsがない間はビルドのみ行い、公開は手元の認証環境から実行する。
-
-手元から同じビルドを直接公開するときは、Cloudflare認証済みの環境で次を実行する。
-
-```sh
-npm run build
-npx wrangler pages deploy dist --project-name blender-animation --branch main
-```
-
-Cloudflare Pagesへの初回登録時は、プロジェクトのproduction branchを `main` にする。`dist/` と `node_modules/` はGitに含めない。
-
-## 商略AI プロモーション
-
-`/works/shoryaku-promo/` に20秒・1920×1080・24fpsのBlenderムービーを掲載。青いワンピースの女の子が、事業情報・連携データ・検索市場から施策提案へ案内する。MP4はオリジナルBGM付きで、自動再生しない。再生・停止・音量・全画面・ダウンロードに対応。日本語字幕トラックと文章による内容説明を用意する。
-
-3D版も同じページから選べる。Blender製の人物・舞台・字幕・カメラの`ShoryakuPromo` clipをThree.jsで一度再生し、最後の画面で停止する。停止・再開・最初に戻す・キーボードによるシークが可能。WebGL非対応・読込失敗時はポスターと案内を表示する。画面外と非表示タブでは3D描画を休止する。3Dの照明はWeb向けのため、完成映像はMP4を参照する。
-
-制作元は `blender-works/assets/animations/shoryaku_promo/`。`build.py`、`validate_export.py`、Blender連番レンダー、`finish.py`、`sync_web.py` の順に実行する。90,295三角形、69 Mesh、21材質、134骨、GLB約10.5MB。保存BlendとGLBの主要関節位置を照合した。素材・音楽・フォント・価格情報の確認日は[制作記録](docs/assets/shoryaku-promo.md)に記載。
+[blender-animation.pages.dev](https://blender-animation.pages.dev/) に `dist/` を配信します。`main` へのpush時はGitHub Actionsがbuildを確認し、Cloudflare Pagesの認証シークレットがあれば公開します。手元からの公開は認証済み環境で `npm run build` の後に `npx wrangler pages deploy dist --project-name blender-animation --branch main` を実行します。
