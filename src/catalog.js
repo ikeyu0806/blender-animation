@@ -11,9 +11,9 @@ export const works = [
     "lead": "その数字、次の一手に。",
     "alt": "青いワンピースの女の子と商略AIの無料体験案内",
     "path": "/works/shoryaku-promo/",
-    "preview": "/previews/shoryaku-promo-f0854b47ab10.png",
-    "model": "/models/shoryaku-promo-f7fcce925987.glb",
-    "video": "/media/shoryaku-promo-9a0d11252247.mp4",
+    "preview": "/previews/shoryaku-promo-629bdc8d8176.png",
+    "model": "/models/shoryaku-promo-195dd094e2e4.glb",
+    "video": "/media/shoryaku-promo-bbceff1034f4.mp4",
     "captions": "/media/shoryaku-promo-bca41f48d50e.vtt"
   },
   // shoryaku-promo:end
