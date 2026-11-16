@@ -8,7 +8,7 @@ export default function PromoStage({ model, preview }) {
   const [status, setStatus] = useState('loading');
   const [playing, setPlaying] = useState(false);
   const [position, setPosition] = useState(0);
-  const [duration, setDuration] = useState(20);
+  const [duration, setDuration] = useState(12);
   useEffect(() => {
     let disposed = false;
     let renderer;
@@ -16,7 +16,7 @@ export default function PromoStage({ model, preview }) {
     let animation;
     let camera;
     let mixer;
-    let clipDuration = 20;
+    let clipDuration = 12;
     let visible = true;
     const scene = new THREE.Scene();
     scene.background = new THREE.Color('#edf3fa');

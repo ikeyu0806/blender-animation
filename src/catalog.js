@@ -6,15 +6,15 @@ export const works = [
     "title": "商略AI",
     "english": "Shoryaku AI",
     "category": "プロモーションムービー",
-    "duration": "20秒",
-    "description": "青いワンピースの女の子が案内する、商略AIの20秒ムービー。",
-    "lead": "その数字、次の一手に。",
-    "alt": "青いワンピースの女の子と商略AIの無料体験案内",
+    "duration": "12秒",
+    "description": "青いワンピースの女の子が案内する、商略AIの12秒ムービー。",
+    "lead": "月額980円で使えるマーケティングパートナー",
+    "alt": "大きなコピーと笑顔の女の子で紹介する商略AI",
     "path": "/works/shoryaku-promo/",
-    "preview": "/previews/shoryaku-promo-629bdc8d8176.png",
-    "model": "/models/shoryaku-promo-195dd094e2e4.glb",
-    "video": "/media/shoryaku-promo-bbceff1034f4.mp4",
-    "captions": "/media/shoryaku-promo-bca41f48d50e.vtt"
+    "preview": "/previews/shoryaku-promo-15e952a0baf5.png",
+    "model": "/models/shoryaku-promo-c4a96ae279bc.glb",
+    "video": "/media/shoryaku-promo-79091fcf48b7.mp4",
+    "captions": "/media/shoryaku-promo-8aac214f0c48.vtt"
   },
   // shoryaku-promo:end
 ];

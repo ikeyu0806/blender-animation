@@ -20,13 +20,13 @@ export default function PromoExperience({ work }) {
   return <div className="promo-page">
     <header className="promo-header"><a href={asset('/')}>← 映像作品一覧</a><span>BLENDER FILM CATALOG</span><span>01 / PROMOTION</span></header>
     <main className="promo-main">
-      <div className="promo-heading"><div><p>SHORYAKU AI · BRAND FILM</p><h1>商略AI プロモーション</h1></div><span>20秒 / 1920 × 1080 / 24fps</span></div>
+      <div className="promo-heading"><div><p>SHORYAKU AI · BRAND FILM</p><h1>商略AI プロモーション</h1></div><span>12秒 / 1920 × 1080 / 24fps</span></div>
       <div className="promo-switch" role="group" aria-label="表示形式">
         <button type="button" aria-pressed={mode === 'movie'} onClick={() => changeMode('movie')}>ムービー</button>
         <button type="button" aria-pressed={mode === 'scene'} onClick={() => changeMode('scene')}>3Dアニメーション</button>
       </div>
       {mode === 'movie' ? <>
-        <video className="promo-video" ref={video} controls playsInline preload="metadata" width="1920" height="1080" poster={asset(work.preview)} src={asset(work.video)} onError={() => setFailed(true)} aria-label="商略AIの20秒プロモーションムービー" aria-describedby="promo-description">
+        <video className="promo-video" ref={video} controls playsInline preload="metadata" width="1920" height="1080" poster={asset(work.preview)} src={asset(work.video)} onError={() => setFailed(true)} aria-label="商略AIの12秒プロモーションムービー" aria-describedby="promo-description">
           <track kind="captions" src={asset(work.captions)} srcLang="ja" label="日本語" />
           <a href={asset(work.video)}>MP4を開く</a>
         </video>
@@ -34,10 +34,10 @@ export default function PromoExperience({ work }) {
         <div className="promo-player-note"><span>音声なし</span><a href={asset(work.video)} download>MP4をダウンロード ↓</a></div>
       </> : <Suspense fallback={<p role="status">3Dアニメーションを準備しています…</p>}><PromoStage model={asset(work.model)} preview={asset(work.preview)} /></Suspense>}
       <section className="promo-info" id="promo-description">
-        <div><p className="promo-kicker">その数字、次の一手に。</p><h2>事業と数字を、<br />具体的な施策へ。</h2></div>
-        <div><p>青いワンピースの女の子が、表情とカメラの切り替えで商略AIを紹介する短いムービーです。事業情報・連携データ・検索市場をつなぎ、次のアクションへ案内します。</p><p>映像の図は機能を説明するイメージです。料金・無料体験の情報は2026年11月5日時点の公式サイトに基づきます。</p><a className="promo-brand-link" href="https://shoryaku.net/" target="_blank" rel="noreferrer">商略AIのサイトへ ↗</a></div>
+        <div><p className="promo-kicker">月額980円で使える</p><h2>マーケティング<br />パートナー。</h2></div>
+        <div><p>AIが情報を読み取って事業戦略を組み立て。大きなコピーと笑顔の女の子、背景に集まる光の粒で伝える12秒のムービーです。</p><p>背景の演出は情報を整理するイメージです。月額980円はライトプランの価格です。2026年11月16日時点の公式サイトに基づきます。</p><a className="promo-brand-link" href="https://shoryaku.net/" target="_blank" rel="noreferrer">商略AIのサイトへ ↗</a></div>
       </section>
-      <details className="promo-transcript"><summary>映像の内容と制作クレジット</summary><ol><li>その数字、次の一手に。マーケティングを、もっと前へ。</li><li>事業と数字を、ひとつにつなぐ。事業情報、連携データ、検索市場。</li><li>分析から、具体的な施策へ。クロスSWOT・STP・4P / 4Cで方針を。</li><li>商略AI。マーケティング特化AI。月額980円から。14日間無料で試す。カード登録不要・自動課金なし。</li></ol><p>キャラクター: blender-works / VRoid Studio / pixiv Inc. 書体: Noto Sans CJK JP（SIL OFL 1.1）。音声なし。</p><p>3D版は同じBlenderアニメーションを再生します。照明の見え方はムービーと異なります。</p><a href={asset('/media/shoryaku-promo-credits.txt')}>素材と制作記録</a></details>
+      <details className="promo-transcript"><summary>映像の内容と制作クレジット</summary><ol><li>月額980円で使えるマーケティングパートナー。</li><li>AIが情報を読み取って事業戦略を組み立て。</li></ol><p>青いワンピースの女の子が微笑んで案内します。背後の弧が回り、光の粒が集まって整った形になります。商略AIの名前と shoryaku.net を表示して終わります。</p><p>キャラクター: blender-works / VRoid Studio / pixiv Inc. 書体: Noto Sans CJK JP（SIL OFL 1.1）。音声なし。</p><p>3D版は同じBlenderアニメーションを再生します。照明の見え方はムービーと異なります。</p><a href={asset('/media/shoryaku-promo-credits.txt')}>素材と制作記録</a></details>
     </main>
     <footer className="promo-footer"><a href={asset('/')}>Blender映像作品集</a><span>Blender + Three.js · 2026</span></footer>
   </div>;

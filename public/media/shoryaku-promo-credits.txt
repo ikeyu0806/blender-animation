@@ -1,36 +1,42 @@
-# 商略AI プロモーション
+# 商略AI — マーケティングパートナー
 
-青いワンピースの女の子を案内役にした20秒・1920×1080・24fpsのBlender映像。白、紺、ゴールドは[公式サイト](https://shoryaku.net/)を参照。映像内の図は概念表現で、実際の管理画面や成果数値ではない。価格、無料体験、機能は2026-11-06に公式サイトで確認した。
+12秒・1920×1080・24fps・音声なしのBlender CM。青いワンピースの女の子を大きく配置し、2つの短いコピーで伝える。商品情報は[商略AI公式](https://shoryaku.net/)を2026-11-16に確認。月額980円はライトプランの価格であり、全プラン共通の価格ではない。
 
 ## 構成
 
-- 0–4.25秒: 「その数字、次の一手に。」。事業情報・連携データ・検索市場のカード。全身から顔の寄りへ切り替える。
-- 4.25–9.21秒: 「事業と数字を、ひとつにつなぐ。」。上半身と顔の寄りで案内の表情を見せる。
-- 9.21–14.25秒: 「分析から、具体的な施策へ。」。提案カードと案内ポーズ。
-- 14.25–20秒: 商略AI、月額980円から、14日間無料で試す。顔の寄りから全身のエンドカードへ切り替える。
+- 0–6秒: 「月額980円で使える」「マーケティング」「パートナー」。女の子が微笑み、背景で金色と青色の弧・光の粒が動く。
+- 6–12秒: 「AIが情報を読み取って」「事業戦略を」「組み立て。」。上半身を大きく保ちながらわずかに寄り、粒が3列に整う。笑顔とこのコピーで終える。
 
-表情と腕の正本は `performance.py`。目・眉・口の8種類のshape keyとまばたきを組み合わせ、興味、気付き、明るい案内、自信、笑顔の招待へ変化させる。[CLIP STUDIO公式のVRM表情解説](https://tips.clip-studio.com/ja-jp/articles/10118)を参考に、既存モデルのshape keyをブレンドしている。無音なので会話を模した口パクは入れない。
+画面内の補助テキストは商略AIの名前とURLだけ。無料体験、機能一覧、フレームワーク名などは表示しない。文字は大きさを保って短くスライドし、長く読める状態で保持する。背景の図形は情報を整理するイメージで、実際の画面・成果数値を表さない。再生は1回、末尾は静止し、ループへ接続しない。
 
-VRMの表示Bone軸は実際の腕の長軸と異なるため、肩→肘→手首と指の付け根から向きを求める。肘の屈曲面と掌の法線をそれぞれ指定し、前腕の回外で掌を上・正面へ向け、手首と指先の長軸は揃える。方向は球面補間し、手を下ろすときはスカートの外側に収める。7つの撮影位置をカットで切り替える。20秒の一度再生を想定し、ループの端は接続しない。音声・BGM・ナレーションは入れない。
+## 人物
+
+共通の `blue_dress_heroine` のアニメ調の顔を利用する。中立は閉じた小さい微笑み、笑う場面は弧を描く閉じた目と控えめな口。顔・肌・目はunlit、髪・服はPBR。淡い頬色を持ち、鼻の光沢や前髪の硬い影を抑える。`performance.py` は肩→肘→手首と指の付け根の軸から掌を制御する。12秒に合わせて動作を再配置する。
 
 ## 再生成
 
-Blender 5.2.2 LTSとffmpegを使用。人物の入力は `output/blue_dress_heroine/blue_dress_heroine.blend`。無い場合は `assets/characters/blue_dress_heroine/build.py` で再生成する。元の人物ソース・Blendは変更しない。
+`blender-works` を起点に実行する。
 
 ```sh
-/Applications/Blender.app/Contents/MacOS/Blender -b --python-exit-code 1 --python assets/animations/shoryaku_promo/build.py -- --preview --export
-/Applications/Blender.app/Contents/MacOS/Blender -b --python-exit-code 1 --python assets/animations/shoryaku_promo/validate_export.py
-/Applications/Blender.app/Contents/MacOS/Blender -b output/shoryaku_promo/blend/shoryaku_promo.blend -s 1 -e 480 -a
+blender -b --python-exit-code 1 -P assets/animations/shoryaku_promo/build.py -- --preview --export
+blender -b --python-exit-code 1 -P assets/animations/shoryaku_promo/validate_export.py
+blender -b output/shoryaku_promo/blend/shoryaku_promo.blend -s 1 -e 288 -a
 python3 assets/animations/shoryaku_promo/finish.py
 python3 assets/animations/shoryaku_promo/sync_web.py
 ```
 
-生成物は `output/shoryaku_promo/` に保存する。Blendは画像とフォントを内包し、人物、表情、カメラ、文字、カードの動きを編集できる。GLBは文字・曲線をMesh化し、毎フレームのアニメーションを1本の`ShoryakuPromo` clipへまとめる。完成映像の照明と色はMP4を正とし、Webの3D版では見え方が異なる。
+旧20秒版の連番と混在しないよう、新しい連番は `output/shoryaku_promo/frames_partner/` に保存する。保存Blendは画像とフォントを内包し、文字、人物、カメラ、背景の演出を編集できる。GLBは文字・曲線をMesh化し、毎フレームの動きを `ShoryakuPromo` clipへまとめる。色・照明の完成形はMP4で、Three.jsでは照明の見え方が異なる。
+
+## 検査
+
+- 全288フレームで手首の向き、肘の可動域、回転の連続性を確認。
+- 文字の投影範囲・高さと、顔の画面占有率を検査し、代表7カットで文字と人物の重なりを目視。
+- 保存BlendとGLBを独立に読み直し、134骨の主要関節、表情値、12秒のclip、unlitの顔材質を照合。
+- MP4は1080p・288フレーム・12秒で、音声トラックを含まないことを確認。
+- 正本は `reports/validation.json` と `reports/video.json`。検査に合格したGLBのハッシュだけを同期する。
 
 ## 素材・権利
 
-- 人物: `blender-works/assets/characters/blue_dress_heroine`。VRoid Studioの標準素体・髪型・衣装・靴を使った既存モデル。クレジットは `blender-works / VRoid Studio / pixiv Inc.`。人物アセットのREADMEと[VRoid Studioガイドライン](https://vroid.com/studio/guidelines)に従う。
-- 書体: Noto Sans CJK JP Medium、SIL Open Font License 1.1。`FONT-LICENSE.txt` と[公式配布元](https://github.com/notofonts/noto-cjk)を参照。buildはSHA-256で入力を固定する。
-- ロゴ: 公式サイトの紺・金のブロックマークをBlenderの形状で再現。商略AIの広告用途。
-
-布と髪は元のスキニングを使い、物理シミュレーションは行わない。代表7カットで表情、手首、肩・肘、字幕の重なり、背景を確認する。全480フレームの手首角度・肘の可動域・回転の連続性を検査し、案内時の掌は上、挙手時はカメラ側を向くことを確認する。保存BlendとGLBを独立に読み直し、指の付け根を含む主要関節と表情値、固定した足、clipを照合する。GLBの構造検査値は `output/shoryaku_promo/reports/validation.json`、MP4の映像・音声トラックは `reports/video.json` を正とする。
+- 人物: `blender-works/assets/characters/blue_dress_heroine`。VRoid Studioの標準素体・髪型・衣装・靴を使用。クレジットは `blender-works / VRoid Studio / pixiv Inc.`。[VRoid Studioガイドライン](https://vroid.com/studio/guidelines)と人物READMEに従う。髪・衣装はスキニングで動き、物理演算は行わない。
+- 書体: Noto Sans CJK JP Medium、SIL Open Font License 1.1。`FONT-LICENSE.txt`と[公式配布元](https://github.com/notofonts/noto-cjk)を参照。buildは入力のSHA-256を検査する。
+- 商略AIの名前・訴求: 商略AIの広告用途。
