@@ -1,6 +1,6 @@
 # Blender映像作品集
 
-Blenderで制作したCMや短い映像作品を鑑賞するカタログです。現在は青いワンピースの女の子が商略AIを紹介する[12秒のプロモーションムービー](https://blender-animation.pages.dev/works/shoryaku-promo/)を掲載しています。ムービーと、同じBlenderアニメーションを再生する3D版があります。音声はありません。
+Blenderで制作したCMや短い映像作品を鑑賞するカタログです。現在は青いワンピースの女の子が商略AIを紹介する[16秒のVTuber風プロモーションムービー](https://blender-animation.pages.dev/works/shoryaku-promo/)を掲載しています。ムービーと、同じBlenderアニメーションを再生する3D版があります。音声はありません。
 
 焚き火・湖畔・夜の花園は、視点を操作できる空間として [`threejs-worlds`](../threejs-worlds/README.md) に移しました。旧作品URLから新しいワールドへ転送します。これらの3Dモデルの正本とモデルカタログは [`blender-works`](../blender-works/README.md) にあります。
 
@@ -10,7 +10,7 @@ Node.js 22.12以降を使い、`npm ci` の後に `npm run dev` を実行しま�
 
 ## 制作
 
-正本は `blender-works/assets/animations/shoryaku_promo/` にあります。`build.py` で大きなコピー・人物・背景の演出を含む12秒のSceneを再生成し、`validate_export.py` で保存BlendとGLBを照合します。Blenderの連番を `finish.py` で音声なしのMP4にし、`sync_web.py` で検査済みアセットをこのリポジトリへ同期します。制作・掲載の手順は [開発ガイド](docs/skills/blender-animation.md) と [制作記録](docs/assets/shoryaku-promo.md)を参照してください。
+正本は `blender-works/assets/animations/shoryaku_promo/` にあります。`build.py` で大きなコピー・人物・背景の演出を含む16秒のSceneを再生成し、`validate_export.py` で保存BlendとGLBを照合します。Blenderの連番を `finish.py` で音声なしのMP4にし、`sync_web.py` で検査済みアセットをこのリポジトリへ同期します。制作・掲載の手順は [開発ガイド](docs/skills/blender-animation.md) と [制作記録](docs/assets/shoryaku-promo.md)を参照してください。
 
 ## 公開
 
